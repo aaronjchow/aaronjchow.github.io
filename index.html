@@ -85,11 +85,10 @@
         <div class="row">
           <!-- <div class="col-lg-4 ml-auto"> -->
           <div class="text-left" style="margin-right:20px; margin-left:20px">
-            <p>Welcome! I am Adam, a 5th year <b>Computer Science</b> Major at <b>Georgia Tech</b> with threads in <b>People</b> and <b>Media</b> focusing on user experience in emerging technology.</p>
-            <p>My passion for technology began when I <b>started my own business</b> in high school repairing broken phone screens and became more structured when I completed 3 internships with The Kroger Co. in <b>Research & Development</b> before beginning college.
-              From there I interned with NCR as a <b>software development intern</b> to gain exposure to development where I not only implemented spec but redesigned specs which were later implemented.
-              Finally for my last two internships, I interned with VMware as the <b>only undergraduate</b> student in the company to be a <b>Product Management Intern</b> where I worked on the Boxer mobile application and created ideas that have been drafted into a <b>patent</b> to be filed in the coming months.</p>
-            <p>In my free time, I like Electric Longboarding, taking photos, experimenting with virtual reality, learning about the newest tech, learning about supercars, hacking my iPhone (which has actually come in handy during multiple internships), finding new restaurants and helping others with their technology.</p>
+            <p>Welcome! I am Aaron, a 4th year Electrical Engineering student at the University of Michigan with 5 years of industry experience with Additive Manufacturing.</p>
+            <p>My interest with electromechanical devices began when I began modifying my foam dart guns to have more capabilities, such as better accuracy, higher fire rates, and ammo counting capabilities. After getting much positive feedback from that project, I began learning more about controls and embedded systems, laying the foundation for my work in neurally enabled prosthetic devices. I began working on my prosthetic arm designs in high school, first developing my own amplifiers and control circuits and code, and eventually designing and fabricating a full arm mainly created with additive technologies.</p>
+            <p>My interest in additive technologies has taken me through 5 internships where I have had the opportunity to work on everything from powder development for laser systems, to end use parts to be implemented. In addition to this, I have presented my own work at the RAPID industry conference for 3 consecutive years. </p>
+            <p>In my free time, I enjoy exploring on my Electric Longboard, learning about clocks and timekeeping, collaborating with people on creative projects, and eating delicious food.</p>
             <br></br>
             <h1 class="text-center" style=" font-size: 30px">Additive Manufacturing Experience</h1>
           
@@ -98,11 +97,11 @@
                 <div class="row">
                   <div class="col-lg-6 ">
                       <div id="obj" class="text-center"></div>
-                      <p class="text-center">Print in place fully functioning wind up clock</p>
+                      <p class="text-center">Render of print in place fully functioning wind up clock</p>
                   </div>
                   <div class="col-lg-6">
                       <div id="obj2" class="text-center"></div>
-                      <p class="text-center">3D printed cybernetic arm with neural interface</p>
+                      <p class="text-center">Render of 3D printed cybernetic arm with neural interface</p>
                   </div>
                   
                 </div>
@@ -258,7 +257,7 @@
         // scene.add( pointLight );
 
         var loader2 = new THREE.OBJLoader();
-        loader2.load( "obj/clock.obj", function ( object ) {
+        loader2.load( "obj/arm2.obj", function ( object ) {
           object.children[0].geometry.computeFaceNormals();
           var  geometry2 = object.children[0].geometry;
           // console.log(geometry);
