@@ -50,17 +50,18 @@
     </nav>
 
     <!-- Header -->
-    <header class="masthead" style="background-image: url('img/background1.png');width:100%;height:100%;background-position: center;background-size: cover">
+    <header class="masthead" style="background-image: url('img/background.jpg');width:100%;height:100%;background-position: center;background-size: cover">
       <div class="container">
           <div style="width:30%; height:30%; margin-left:auto; margin-right:auto">
-              <img class="img-fluid" src="img/profile2.jpg" alt="" style="border-radius: 50%">
+              <img class="img-fluid" src="img/profile1.jpg" alt="" style="border-radius: 50%">
           </div>
 
         <div class="intro-text">
-          <span class="name" style="text-shadow: 0px 0px 10px #000;">Aaron Chow</span>
+          <!-- <span class="name" style="text-shadow: 0px 0px 50px #fff; color: #000;">Aaron Chow</span> -->
+          <span class="name" style="text-shadow: 0px 0px 20px black; -webkit-text-fill-color: white; -webkit-text-stroke-width: 1px; -webkit-text-stroke-color: white; font-size: 100px">Aaron Chow</span>
 <!--          <hr class="star-light">-->
-          <span class="skills" style="text-shadow: 0px 0px 10px #000;">Student | Hacker | Electric Longboarder</span>
-          <p style="text-shadow: 0px 0px 10px #000;">Seeking a full-time opportunity in Product Management</p>
+          <span class="skills" style="text-shadow: 0px 0px 20px black; -webkit-text-fill-color: white; -webkit-text-stroke-width: 1px; -webkit-text-stroke-color: white; font-size: 55px">Student | Hacker | Electric Longboarder</span>
+          <p style="text-shadow: 0px 0px 20px black; -webkit-text-fill-color: white; -webkit-text-stroke-width: 1px; -webkit-text-stroke-color: white; font-size: 40px">Seeking a full-time opportunity in Additive Manufacturing</p>
         </div>
       </div>
     </header>
@@ -79,7 +80,23 @@
               Finally for my last two internships, I interned with VMware as the <b>only undergraduate</b> student in the company to be a <b>Product Management Intern</b> where I worked on the Boxer mobile application and created ideas that have been drafted into a <b>patent</b> to be filed in the coming months.</p>
             <p>In my free time, I like Electric Longboarding, taking photos, experimenting with virtual reality, learning about the newest tech, learning about supercars, hacking my iPhone (which has actually come in handy during multiple internships), finding new restaurants and helping others with their technology.</p>
             <br></br>
-            <h2 class="text-center">Product Management Experience</h2>
+            <h2 class="text-center">Additive Manufacturing Experience</h2>
+          
+            <!-- rotating clocks container that wraps around -->
+            <div class="container">
+                <div class="row">
+                  <div class="col-lg-6 ">
+                      <div id="obj" class="text-center"></div>
+                      <p class="text-center">Print in place fully functioning wind up clock</p>
+                  </div>
+                  <div class="col-lg-6">
+                      <div id="obj2" class="text-center"></div>
+                      <p class="text-center">3D printed cybernetic arm with neural interface</p>
+                  </div>
+                  
+                </div>
+              </div>
+            
             <p>I have completed 2 internships with VMware as a Product Management Intern working with the <a href="https://getboxer.com/">Boxer<a> mobile application team. I was the only undergraduate student to be hired for product management and the only product management intern who was given an offer to return the next summer.
               The first summer I worked on competative analysis documents as well as researching the possibilities with the new mobile OSs coming out. I also created essential documentation and worked on the nomination process for beta customers.
             </p><p>The second summer I worked on updating more competative analysis documentation, writing product requirements with acceptance criteria to update a popular feature, created how-to videos to market Boxer in <a href="https://blogs.vmware.com/euc/2017/08/unlocking-mobile-moments-vmware-workspace-one-productivity-apps.html">blog posts<a> and customer packages, and finally detailed a new machine learning feature from scratch taking the feature from idea to proof of concept to demoing deep learning locally on a mobile device. I also created UI and UX mockups, all of which has been written up into a patent being filed by VMware. </p>
@@ -97,6 +114,179 @@
           </div> -->
         </div>
       </div>
+
+
+      <!-- Code for Rotating 3D clock -->
+      <script src="js/Three.js"></script>
+      <script src="js/OBJLoader.js"></script>
+
+      <!-- 1st rotating clock -->
+      <script>
+         var container, stats;
+
+        var camera, scene, renderer, model, particleMaterial, zoom, rotate;
+
+        var mouseX = 0, mouseY = 0;
+
+        var width = 600;
+        var height = 600;
+
+        var windowHalfX = width / 2;
+        var windowHalfY = height / 2;
+
+        init();
+        animate();
+
+        function init() {
+          container = document.getElementById('obj');
+
+          rotate = true;
+
+          scene = new THREE.Scene();
+
+          addCamera(0, -500, 1);
+          
+
+          zoom = camera.fov;
+
+          var ambient = new THREE.AmbientLight(  0x202020 );
+          scene.add( ambient );
+
+          
+          // Add another directional light
+          var directionalLight = new THREE.DirectionalLight( 0xfffff, 0.75 );
+          directionalLight.position.set( 1, 0, 0 );
+          scene.add( directionalLight );
+
+          // var pointLight = new THREE.PointLight( 0xffffff, 5, 29 );
+          // pointLight.position.set( 0, -25, 10 );
+          // scene.add( pointLight );
+
+          var loader = new THREE.OBJLoader();
+          loader.load( "obj/clock2.obj", function ( object ) {
+            object.children[0].geometry.computeFaceNormals();
+            var  geometry = object.children[0].geometry;
+            // console.log(geometry);
+            THREE.GeometryUtils.center(geometry);
+            geometry.dynamic = true;
+            var material = new THREE.MeshLambertMaterial({color: 0x2194ce, shading: THREE.FlatShading, vertexColors: THREE.VertexColors });
+            mesh = new THREE.Mesh(geometry, material);  
+            scene.add( mesh );
+          } );
+
+          renderer = new THREE.WebGLRenderer();
+          renderer.setSize( width, height );
+          container.appendChild( renderer.domElement );
+        }
+
+        function animate() {
+          requestAnimationFrame( animate );
+          render();
+        }
+
+        function render() {
+          if(rotate) {
+            mesh.rotation.z += 0.01;
+          }
+
+          camera.lookAt( scene.position );
+          renderer.render( scene, camera );
+        }
+
+        function addCamera(x, y, z){
+            camera = new THREE.PerspectiveCamera( 17, width / height, 1, 4000 );
+            camera.position.x = x;
+            camera.position.y = y;
+            camera.position.z = z;
+            scene.add( camera );
+        }
+      
+      </script>
+
+
+      <!-- SECOND ROTATING ITEM -->
+      <script>
+        var container, stats;
+
+      var camera2, scene2, renderer2, model2, particleMaterial, zoom, rotate;
+
+      var mouseX = 0, mouseY = 0;
+
+      var width = 600;
+      var height = 600;
+
+      var windowHalfX = width / 2;
+      var windowHalfY = height / 2;
+
+      init2();
+      animate2();
+
+      function init2() {
+        container2 = document.getElementById('obj2');
+
+        rotate = true;
+
+        scene2 = new THREE.Scene();
+
+        addCamera2(0, -500, 1);
+        
+
+        zoom = camera2.fov;
+
+        // var ambient2 = new THREE.AmbientLight(  0x303030 );
+        // scene2.add( ambient2 );
+
+        
+        // Add another directional light
+        var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.75 );
+        directionalLight.position.set( 1, 0, 0 );
+        scene2.add( directionalLight );
+
+        // var pointLight = new THREE.PointLight( 0xffffff, 5, 29 );
+        // pointLight.position.set( 0, -25, 10 );
+        // scene.add( pointLight );
+
+        var loader2 = new THREE.OBJLoader();
+        loader2.load( "obj/clock.obj", function ( object ) {
+          object.children[0].geometry.computeFaceNormals();
+          var  geometry2 = object.children[0].geometry;
+          // console.log(geometry);
+          THREE.GeometryUtils.center(geometry2);
+          geometry2.dynamic = true;
+          var material2 = new THREE.MeshLambertMaterial({color: 0x21f0ce, shading: THREE.FlatShading, vertexColors: THREE.VertexColors });
+          mesh2 = new THREE.Mesh(geometry2, material2);  
+          scene2.add( mesh2 );
+        } );
+
+        renderer2 = new THREE.WebGLRenderer();
+        renderer2.setSize( width, height );
+        container2.appendChild( renderer2.domElement );
+      }
+
+      function animate2() {
+        requestAnimationFrame( animate2 );
+        render2();
+      }
+
+      function render2() {
+        if(rotate) {
+          mesh2.rotation.z += 0.01;
+        }
+
+        camera2.lookAt( scene2.position );
+        renderer2.render( scene2, camera2 );
+      }
+
+      function addCamera2(x, y, z){
+          camera2 = new THREE.PerspectiveCamera( 17, width / height, 1, 4000 );
+          camera2.position.x = x;
+          camera2.position.y = y;
+          camera2.position.z = z;
+          scene2.add( camera2 );
+      }
+    
+      </script>
+
     </section>
 
     <!-- Portfolio Grid Section -->
