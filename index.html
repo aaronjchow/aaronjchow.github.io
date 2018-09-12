@@ -173,7 +173,7 @@
           // scene.add( pointLight );
 
           var loader = new THREE.OBJLoader();
-          loader.load( "obj/clock2.obj", function ( object ) {
+          loader.load( "obj/clock.obj", function ( object ) {
             object.children[0].geometry.computeFaceNormals();
             var  geometry = object.children[0].geometry;
             // console.log(geometry);
@@ -257,7 +257,7 @@
         // scene.add( pointLight );
 
         var loader2 = new THREE.OBJLoader();
-        loader2.load( "obj/arm2.obj", function ( object ) {
+        loader2.load( "obj/arm.obj", function ( object ) {
           object.children[0].geometry.computeFaceNormals();
           var  geometry2 = object.children[0].geometry;
           // console.log(geometry);
