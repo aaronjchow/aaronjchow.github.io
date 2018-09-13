@@ -173,7 +173,7 @@
           // scene.add( pointLight );
 
           var loader = new THREE.OBJLoader();
-          loader.load( "obj/arm6.obj", function ( object ) {
+          loader.load( "obj/gyroscope.obj", function ( object ) {
             object.children[0].geometry.computeFaceNormals();
             var  geometry = object.children[0].geometry;
             // console.log(geometry);
@@ -182,7 +182,6 @@
             var material = new THREE.MeshLambertMaterial({color: 0x2194ce, shading: THREE.FlatShading, vertexColors: THREE.VertexColors });
             mesh = new THREE.Mesh(geometry, material);  
             scene.add( mesh );
-            render();
           } );
 
           renderer = new THREE.WebGLRenderer();
