@@ -173,7 +173,7 @@
           // scene.add( pointLight );
 
           var loader = new THREE.OBJLoader();
-          loader.load( "obj/clock.obj", function ( object ) {
+          loader.load( "obj/arm.obj", function ( object ) {
             object.children[0].geometry.computeFaceNormals();
             var  geometry = object.children[0].geometry;
             // console.log(geometry);
@@ -191,13 +191,12 @@
 
         function animate() {
           requestAnimationFrame( animate );
+          // mesh.rotation.z += 0.01
           render();
         }
 
         function render() {
-          if(rotate) {
-            mesh.rotation.z += 0.01;
-          }
+          mesh.rotation.z += 0.01;
 
           camera.lookAt( scene.position );
           renderer.render( scene, camera );
@@ -216,7 +215,7 @@
 
       <!-- SECOND ROTATING ITEM -->
       <script>
-        var container, stats;
+      var container2, stats;
 
       var camera2, scene2, renderer2, model2, particleMaterial, zoom, rotate;
 
@@ -227,6 +226,8 @@
 
       var windowHalfX = width / 2;
       var windowHalfY = height / 2;
+
+      count = 0;
 
       init2();
       animate2();
@@ -257,14 +258,14 @@
         // scene.add( pointLight );
 
         var loader2 = new THREE.OBJLoader();
-        loader2.load( "obj/arm.obj", function ( object ) {
+        loader2.load( "obj/clock2.obj", function ( object ) {
           object.children[0].geometry.computeFaceNormals();
           var  geometry2 = object.children[0].geometry;
           // console.log(geometry);
           THREE.GeometryUtils.center(geometry2);
           geometry2.dynamic = true;
           var material2 = new THREE.MeshLambertMaterial({color: 0x21f0ce, shading: THREE.FlatShading, vertexColors: THREE.VertexColors });
-          mesh2 = new THREE.Mesh(geometry2, material2);  
+          mesh2 = new THREE.Mesh(geometry2, material2);
           scene2.add( mesh2 );
         } );
 
@@ -279,9 +280,12 @@
       }
 
       function render2() {
-        if(rotate) {
-          mesh2.rotation.z += 0.01;
-        }
+        // console.log(count)
+        // if (count > 20) {
+        //   mesh.rotation.z += 0.01
+        // }
+        // count++
+        mesh2.rotation.z += 0.01;
 
         camera2.lookAt( scene2.position );
         renderer2.render( scene2, camera2 );
